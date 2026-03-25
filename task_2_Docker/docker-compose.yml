@@ -4,9 +4,9 @@ services:
     build: .
     container_name: postgres_logs_db
     environment:
-      POSTGRES_USER: ${USER}
-      POSTGRES_PASSWORD: ${PASSWORD}
-      POSTGRES_DB: ${DB}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
       SECRET_HASH: ${SECRET_HASH}
     ports:
       - "${DB_PORT}:5432"
