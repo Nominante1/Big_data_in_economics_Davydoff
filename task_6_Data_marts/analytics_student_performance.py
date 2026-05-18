@@ -105,12 +105,20 @@ def insert_data(conn):
             courseid,
             department_id,
             department_name,
-            education_level,
-            education_base,
-            semester,
-            course_year,
-            final_grade,
-            
+            CASE 
+                WHEN leveled = 1 THEN 'Baccalaureate'
+                WHEN leveled = 2 THEN 'Magisteria'
+                ELSE 'other'
+            END AS education_level,
+            CASE
+                WHEN name_osno = 1 THEN 'Budget'
+                WHEN name_osno = 2 THEN 'Contract'
+                ELSE 'Other'
+            END AS education_base,
+            num_sem AS semester,
+            kurs - 1 AS course_year, --так как курс начинается с 2, а не с 1
+            MAX(CAST(namer_level AS INTEGER)) AS final_grade, --оценка одна на весь семестр по одному предмету, поэтому нужно взять одну из них
+            total_events
 
         FROM public.USER_LOGS
             INNER JOIN public.DEPARTMENTS ON USER_LOGS.department_id = DEPARTMENTS.id
