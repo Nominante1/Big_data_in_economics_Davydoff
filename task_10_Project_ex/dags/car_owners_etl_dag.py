@@ -11,7 +11,6 @@ from generate import step_1_generate_data
 from load_row import step_2_load_raw
 from transform_owner import step_3_transform_owner
 from transform_fines import step_4_transform_fines
-load_csv, run_transform, save_mart
 
 def step_1_generate_data():
     print("Генерация синтетических данных через Faker...")

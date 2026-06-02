@@ -5,5 +5,12 @@ FROM postgres:13
 # Она будет доступна для скрипта инициализации
 COPY datasets /datasets/
 
-# Копируем скрипт инициализации, который будет исполнен при старте
-COPY init.sh /docker-entrypoint-initdb.d/
+# # Копируем скрипт инициализации, который будет исполнен при старте
+# COPY init.sh /docker-entrypoint-initdb.d/
+
+FROM apache/airflow:2.10.4
+RUN pip install psycopg2-binary python-dotenv
+
+COPY requirements.txt /
+# Устанавливаем их
+RUN pip install --no-cache-dir -r /requirements.txt

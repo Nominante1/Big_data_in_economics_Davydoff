@@ -7,8 +7,8 @@ from collections import Counter
 import os
 import sys
 
-fake.add_provider(VehicleProvider)
 fake = Faker('ru_RU')
+fake.add_provider(VehicleProvider)
 Faker.seed(42)      # фиксируем seed для воспроизводимости
 random.seed(42)
 
@@ -149,3 +149,6 @@ def step_1_generate_data():
     policies_df.to_csv(os.path.join(DATA_DIR, 'policies.csv'), index=False)
 
     print(f"Данные успешно сгенерированы и сохранены в папку {DATA_DIR}")
+
+if __name__ == "__main__":
+    step_1_generate_data()

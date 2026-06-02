@@ -3,7 +3,7 @@ import sys
 
 from psycopg2 import sql
 from psycopg2.extras import execute_values
-from scripts.db_utils import get_connection 
+from db_utils import get_connection 
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

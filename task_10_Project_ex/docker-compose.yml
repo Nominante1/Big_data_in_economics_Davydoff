@@ -46,11 +46,11 @@ services:
       start_period: 5s
     restart: always
     ports:
-      - "5432:5432"   # порт для Airflow metadata 
+      - "5433:5432"   # порт для Airflow metadata 
 
   airflow-webserver:
     <<: *airflow-common
-    command: webserver
+    command: airflow webserver
     ports:
       - "8080:8080"
     healthcheck:
@@ -65,7 +65,7 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
-    command: scheduler
+    command: airflow scheduler
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
       interval: 30s
@@ -75,7 +75,7 @@ services:
 
   airflow-init:
     <<: *airflow-common
-    command: version
+    command: airflow version
     environment:
       <<: *airflow-common-env
       _AIRFLOW_DB_UPGRADE: 'true'
