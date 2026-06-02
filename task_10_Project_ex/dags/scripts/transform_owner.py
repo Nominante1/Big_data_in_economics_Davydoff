@@ -2,7 +2,7 @@ import sys
 import os
 from psycopg2 import sql
 from psycopg2.extras import execute_values
-from db_utils import get_connection  # Импортируем подключение из нашего модуля!
+from scripts.db_utils import get_connection  # Импортируем подключение из нашего модуля!
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

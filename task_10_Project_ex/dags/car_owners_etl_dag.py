@@ -12,22 +12,6 @@ from load_row import step_2_load_raw
 from transform_owner import step_3_transform_owner
 from transform_fines import step_4_transform_fines
 
-def step_1_generate_data():
-    print("Генерация синтетических данных через Faker...")
-    # Здесь код генерации CSV файлов (car_owners.csv, cars.csv и т.д.)
-
-def step_2_load_raw():
-    print("Загрузка CSV файлов в сырые таблицы PostgreSQL...")
-    # Здесь код: подключение к БД и выполнение команд \copy или INSERT
-
-def step_3_transform():
-    print("Трансформация данных: расчет агрегатов (штрафы, полисы)...")
-    # Здесь код выполнения сложных SQL-запросов (твои CTE с JOIN и COUNT)
-    # и сохранение результата во временные таблицы или dataframe
-
-def step_4_create_mart():
-    print("Создание итоговой витрины данных...")
-    # Здесь код: берем результаты шага 3 и заливаем в финальную таблицу витрины
 
 default_args = {
     'owner': 'airflow',
@@ -64,13 +48,13 @@ with DAG(
     #Трансформация (SQL)
     task_transform = PythonOperator(
         task_id='transform_data',
-        python_callable=step_3_transform
+        python_callable=step_3_transform_owner
     )
 
     #Формирование витрины
     task_mart = PythonOperator(
         task_id='create_data_mart',
-        python_callable=step_4_create_mart
+        python_callable=step_4_transform_fines
     )
 
     #оператор >> указывает, что задача справа начнется только после УСПЕШНОГО завершения задачи слева

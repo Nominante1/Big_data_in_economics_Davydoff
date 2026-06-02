@@ -1,6 +1,6 @@
 import os
 import sys
-from db_utils import get_connection
+from scripts.db_utils import get_connection
 
 # Добавляем родительскую папку в пути поиска Питона (чтобы работал локальный запуск)
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))

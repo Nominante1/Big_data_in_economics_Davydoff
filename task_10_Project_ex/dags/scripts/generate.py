@@ -17,7 +17,12 @@ N_CARS = 1200
 N_FINES = 5000
 N_POLICIES = 1500
 
-DATA_DIR = '/datasets'
+if os.getenv('AIRFLOW_HOME'):
+    # Путь внутри контейнера Docker
+    DATA_DIR = '/opt/airflow/datasets'  
+else:
+    # Локальный путь на Windows
+    DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'datasets')
 
 # DataFrame с владельцами автомобилей
 def generate_car_owners(n):
